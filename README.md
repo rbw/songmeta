@@ -1,28 +1,53 @@
 <p align="center">
   <br>
-  <img width="128" height="128" src="extras/flavors.png">
-  <br><b>Aioli rest-rdbms Flavor</b>
+  <img width="128" height="128" src="extras/records.png">
+  <br>
 </p>
 
-Aioli Flavor For building a RESTful API with support for relational databases. 
+HTTP/REST API for managing music albums.
 
+## Setting up
 
-##### Core Components
+Requires Python 3.9+, git, and poetry.
 
-| Name        | Description                     |
-|-------------|---------------------------------|
-| controller  | Abstract Controller class       |
-| controllers | Package of concrete Controllers |
-| service     | Abstract Service class          |
-| services    | Package of concrete Services    |
-| database    | Database package                |
+### Building
 
+```
+$ git clone https://github.com/rbw/records.git
+$ cd records
+$ poetry update
+```
 
-##### Database Package
+### Starting Postgres
 
-| Name        | Description                      |
-|-------------|----------------------------------|
-| manager     | Module for managing the database |
-| service     | Database Service mixin           |
-| table       | Abstract Table Model             |
-| tables      | Package of concrete Tables       |
+The application requires an SQLAlchemy-supported relational database. This example uses pg.ARRAY in AlbumModel, making it compatible with Postgres only.
+
+A docker-compose file for running a Postgres server is available in the project root.
+
+```
+$ docker-compose up
+```
+
+### Starting Records 
+
+```
+$ poetry shell
+$ python -m records
+```
+
+## Usage
+
+### Get all albums
+```
+$ curl http://localhost:5000/albums
+```
+
+### Create an album
+```
+$ curl -X POST --data '{"title": "test", "release_date": "2035-01-20", "stores": ["APPLE", "YOUTUBE"], "tracks": ["TEST000000001", "TEST000000002"], "upc": "00000000000005"}' http://localhost:5000/albums
+```
+
+### Show an album
+```
+$ curl http://localhost:5000/albums/00000000000005
+```
