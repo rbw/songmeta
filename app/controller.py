@@ -3,6 +3,7 @@ from json.decoder import JSONDecodeError
 from typing import Type, Any, Tuple
 
 from starlette.responses import Response
+from sqlalchemy.engine import ScalarResult
 from marshmallow.schema import Schema, EXCLUDE
 from marshmallow.exceptions import ValidationError
 from app.exceptions import (
@@ -32,11 +33,11 @@ class Controller(ABC):
 
     @staticmethod
     def serialize(data: Any, schema: Type[Schema], many: bool):
-        return schema(many=many).dumps(data)
+        return schema(many=many).dumps(data, indent=4)
 
     def json_response(self, data, status, schema=None):
         content = (
-            self.serialize(data, schema, many=isinstance(data, list))
+            self.serialize(data, schema, many=isinstance(data, ScalarResult))
             if schema
             else data
         )

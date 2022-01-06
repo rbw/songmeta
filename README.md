@@ -1,18 +1,28 @@
 <p align="center">
   <br>
-  <img width="128" height="128" src="extras/aioli.png">
-  <br><b>Aioli Base Flavor</b>
+  <img width="128" height="128" src="extras/flavors.png">
+  <br><b>Aioli rest-rdbms Flavor</b>
 </p>
 
-Provides a Base Flavor that currently makes use of [Starlette](https://www.starlette.io) for connection 
-handling and [Marshmallow](https://marshmallow.readthedocs.io/en/stable) for data serialization, but offers no 
-external API.
+Aioli Flavor For building a RESTful API with support for relational databases. 
 
-#### Flavor Structure
 
-Most Flavors implements a three-layer architecture with a separation between the Transport, Domain, and Data layers, 
-which should be suitable for most applications.
+##### Core Components
 
-#### Official Flavors (1)
+| Name        | Description                     |
+|-------------|---------------------------------|
+| controller  | Abstract Controller class       |
+| controllers | Package of concrete Controllers |
+| service     | Abstract Service class          |
+| services    | Package of concrete Services    |
+| database    | Database package                |
 
-- [aioli-flavors/rest-rdbms](https://github.com/aioli-flavors/rest-rdbms): RESTful HTTP API, RDBMS support
+
+##### Database Package
+
+| Name        | Description                      |
+|-------------|----------------------------------|
+| manager     | Module for managing the database |
+| service     | Database Service mixin           |
+| table       | Abstract Table Model             |
+| tables      | Package of concrete Tables       |

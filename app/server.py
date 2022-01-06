@@ -1,8 +1,10 @@
 import logging.config
 
+from sqlalchemy.exc import DatabaseError
 from starlette.applications import Starlette
 from starlette.middleware.cors import CORSMiddleware
 
+from app.database import DatabaseManager, db_reset
 from app.exceptions import RequestError
 from app.errors import on_error
 from app.protocol import HttpMethod
@@ -11,7 +13,7 @@ from app.protocol import HttpMethod
 class Server(Starlette):
     log = logging.getLogger(__name__)
 
-    def __init__(self, controllers, *args, debug=False, **kwargs):
+    def __init__(self, db_url, controllers, *args, debug=False, **kwargs):
         logging.config.fileConfig(
             "logging.conf",
             defaults={"level": "DEBUG" if debug else "INFO"},
@@ -23,6 +25,9 @@ class Server(Starlette):
         # Register controllers with app
         for ctrl_cls in controllers:
             self._controller_register(ctrl_cls)
+
+        # Initialize database
+        self.db = DatabaseManager(db_url, debug)
 
         # Set up CORS
         self.add_middleware(
@@ -39,6 +44,7 @@ class Server(Starlette):
 
         # Error handlers
         self.add_exception_handler(RequestError, on_error)
+        self.add_exception_handler(DatabaseError, on_error)
         self.add_exception_handler(Exception, on_error)
 
     def _controller_register(self, ctrl_cls):

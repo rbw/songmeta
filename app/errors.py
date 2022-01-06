@@ -2,10 +2,13 @@ import json
 from http import HTTPStatus
 
 from starlette.responses import Response
+from sqlalchemy.exc import DatabaseError
 from app.exceptions import (
     PayloadValidationError,
+    NoSuchRecord,
     PayloadDecodeError,
     RequestError,
+    IneffectiveDelete,
 )
 
 
@@ -34,8 +37,16 @@ async def on_error(_, exc):
         detail = exc.detail
         if isinstance(exc, PayloadValidationError):
             status = 422
+        elif isinstance(exc, NoSuchRecord):
+            status = 404
         elif isinstance(exc, PayloadDecodeError):
             status = 400
             detail = str(detail)
+        elif isinstance(exc, IneffectiveDelete):
+            status = 400
+            detail = str(detail)
+    elif isinstance(exc, DatabaseError):
+        status = 400
+        detail = f"Database operation failed with code {exc.code}"
 
     return Error(status, detail).response
