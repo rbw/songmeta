@@ -1,13 +1,8 @@
-<p align="center">
-  <br>
-  <img width="128" height="128" src="extras/flavors.png">
-  <br><b>Aioli rest-rdbms Flavor</b>
-</p>
+# rest-dbms: HTTP/REST+RDBMS Flavor
 
-Aioli Flavor For building a RESTful API with support for relational databases. 
+Aioli Flavor For building HTTP/REST APIs with support for relational databases.
 
-
-##### Core Components
+### Core Components
 
 | Name        | Description                     |
 |-------------|---------------------------------|
@@ -18,7 +13,7 @@ Aioli Flavor For building a RESTful API with support for relational databases.
 | database    | Database package                |
 
 
-##### Database Package
+### Database Package
 
 | Name        | Description                      |
 |-------------|----------------------------------|
