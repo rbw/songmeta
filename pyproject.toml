@@ -1,8 +1,8 @@
 [tool.poetry]
-name = "flavor-rest-rdbms"
+name = "songmeta"
 version = "0.1.0"
 license = "MIT"
-description = "Aioli REST+RDBMS Flavor"
+description = "Aioli REST+RDBMS Example, built on top of https://github.com/aioli-flavors/rest-rdbms"
 authors = ["Aioli Project <aioli@vault13.org>"]
 
 [tool.poetry.dependencies]
