@@ -1,8 +1,10 @@
 <p align="center">
   <br>
-  <img width="128" height="128" src="extras/songmeta.png">
+  <img width="200" height="200" src="extras/songmeta.png">
   <br><b>SongMeta</b>
 </p>
+
+## About
 
 Fully functional example built on top of [aioli-flavors/rest-rdbms](https://github.com/aioli-flavors/rest-rdbms).
 
