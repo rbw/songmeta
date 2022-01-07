@@ -1,23 +1,24 @@
 <p align="center">
   <br>
-  <img width="128" height="128" src="extras/records.png">
-  <br><b>Records</b>
+  <img width="128" height="128" src="extras/songmeta.png">
+  <br><b>SongMeta</b>
 </p>
 
+Fully functional example built on top of [aioli-flavors/rest-rdbms](https://github.com/aioli-flavors/rest-rdbms).
 
 ## Setting up
 
-Requires Python 3.9+, git, and poetry.
+Requires Python 3.9+, Git, and Poetry.
 
 ### Building
 
 ```
-$ git clone https://github.com/rbw/records.git
-$ cd records
+$ git clone https://github.com/rbw/songmeta.git
+$ cd songmeta
 $ poetry update
 ```
 
-### Starting Postgres
+## Starting Postgres
 
 The application requires an SQLAlchemy-supported relational database. This example uses pg.ARRAY in AlbumModel, making it compatible with Postgres only.
 
@@ -27,11 +28,11 @@ A docker-compose file for running a Postgres server is available in the project 
 $ docker-compose up
 ```
 
-### Starting Records 
+## Starting SongMeta 
 
 ```
 $ poetry shell
-$ python -m records
+$ python -m songmeta
 ```
 
 ## Usage
