@@ -4,6 +4,7 @@ from sqlalchemy.exc import DatabaseError
 from starlette.applications import Starlette
 from starlette.middleware.cors import CORSMiddleware
 
+from app import seed
 from app.database import DatabaseManager, db_reset
 from app.exceptions import RequestError
 from app.errors import on_error
@@ -59,7 +60,9 @@ class Server(Starlette):
             self.add_route(path, handler, [method])
 
     async def on_app_start(self):
-        pass
+        # @TODO Move to cli
+        await db_reset(self.db)
+        await self.db.seed_load(seed)
 
     async def on_app_stop(self):
         pass
