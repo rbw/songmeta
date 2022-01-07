@@ -1,0 +1,13 @@
+version: "3.3"
+
+services:
+  db:
+    image: postgres
+    volumes:
+      - ./schemas/models:/var/lib/postgresql/schemas
+    environment:
+      - POSTGRES_DB=songmeta
+      - POSTGRES_USER=songmeta
+      - POSTGRES_PASSWORD=songmetasecret
+    ports:
+      - 5432:5432
